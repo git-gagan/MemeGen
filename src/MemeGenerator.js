@@ -10,7 +10,7 @@ export default class MemeGenerator extends React.Component{
             all:[]
         }
         this.change=this.change.bind(this)
-        this.handle=this.handle.bind(this)
+        //this.handle=this.handle.bind(this)
     }
     componentDidMount(){
         fetch("https://api.imgflip.com/get_memes").then(response=>response.json())
@@ -27,7 +27,8 @@ export default class MemeGenerator extends React.Component{
             [name]:value
         })
     }
-    handle(event){
+    //Using arrow function to declare a method gives it a lexical this, so need not to bind it in the constructor
+    handle=(event)=>{
         event.preventDefault()  //prevent the default behaviour of the submit button which is to refresh the page
         this.setState({
             randomImg:this.state.all[Math.floor(Math.random()*this.state.all.length)].url
